@@ -4,7 +4,31 @@
     ViewData["Title"] = Localizer["Title"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@if(User.Identity?.IsAuthenticated == true)
+{
+    <div>
+        <h1 class="display-4">@Localizer["Greetings"]</h1>
+        <p>@Localizer["YourWalletNumber"]: @ViewBag.WalletUser.WalletNumber</p>
+        <p>@Localizer["YourWalletBalance"]: @ViewBag.WalletUser.Balance₽</p>
+    </div>
+    <div class="row gap-3">
+        <div class="col-auto">
+            <a class="btn btn-primary" asp-action="TopUpWallet" asp-controller="Transaction">@Localizer["TopUpWallet"]</a>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" asp-action="Payment" asp-controller="Transaction">@Localizer["Payment"]</a>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" asp-action="Transfer" asp-controller="Transaction">@Localizer["Transfer"]</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">@Localizer["Greetings"]</h1>
+        <p>@Localizer["More"] - <a asp-action="Login" asp-controller="Account">@Localizer["Login"]</a>.</p>
+        <p>@Localizer["RegisterQuestion"] <a asp-action="Login" asp-controller="Account">@Localizer["Register"]</a></p>
+    </div>
+}
