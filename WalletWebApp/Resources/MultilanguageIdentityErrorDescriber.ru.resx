@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- XML headers and schema -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="xml:space" use="optional" fixed="preserve" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <!-- Header for the resx file -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Translations -->
+  <data name="DefaultError" xml:space="preserve">
+    <value>Произошла неизвестная ошибка.</value>
+  </data>
+  <data name="ConcurrencyFailure" xml:space="preserve">
+    <value>Ошибка конкурентного доступа, объект был изменен.</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Неправильный пароль.</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Недействительный токен.</value>
+  </data>
+  <data name="LoginAlreadyAssociated" xml:space="preserve">
+    <value>Этот логин уже используется другим пользователем.</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Имя пользователя недействительно, оно может содержать только буквы или цифры.</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Электронная почта недействительна.</value>
+  </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>Имя пользователя уже занято.</value>
+  </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>Электронная почта уже занята.</value>
+  </data>
+  <data name="InvalidRoleName" xml:space="preserve">
+    <value>Название роли недействительно.</value>
+  </data>
+  <data name="DuplicateRoleName" xml:space="preserve">
+    <value>Название роли уже занято.</value>
+  </data>
+  <data name="UserAlreadyHasPassword" xml:space="preserve">
+    <value>У пользователя уже установлен пароль.</value>
+  </data>
+  <data name="UserLockoutNotEnabled" xml:space="preserve">
+    <value>Блокировка для этого пользователя не включена.</value>
+  </data>
+  <data name="UserAlreadyInRole" xml:space="preserve">
+    <value>Пользователь уже имеет эту роль.</value>
+  </data>
+  <data name="UserNotInRole" xml:space="preserve">
+    <value>Пользователь не имеет эту роль.</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Пароль должен содержать не менее {0} символов.</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы один не буквенно-цифровой символ.</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну цифру ('0'-'9').</value>
+  </data>
+  <data name="PasswordRequiresLower" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну строчную букву ('a'-'z').</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну прописную букву ('A'-'Z').</value>
+  </data>
+</root>

@@ -1,11 +1,29 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using WalletWebApp;
+using WalletWebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
+
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<WalletContext>(options => options.UseNpgsql(connection))
+    .AddIdentity<User, IdentityRole<int>>(options =>
+    {
+        options.Password.RequiredLength = 5;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireDigit = false;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddErrorDescriber<MultilanguageIdentityErrorDescriber>()
+    .AddEntityFrameworkStores<WalletContext>();
 
 var app = builder.Build();
 
