@@ -9,4 +9,5 @@ public class Transaction
     public User? ToUser { get; set; }
     public decimal Amount { get; set; }
     public TransactionType Type { get; set; }
+    public DateTimeOffset CommitedAt { get; set; } = DateTimeOffset.UtcNow;
 }

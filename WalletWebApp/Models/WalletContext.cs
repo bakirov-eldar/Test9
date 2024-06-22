@@ -20,4 +20,10 @@ public class WalletContext : IdentityDbContext<User, IdentityRole<int>, int>
             .IsUnique(true);
         base.OnModelCreating(builder);
     }
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<DateTimeOffset>().HaveConversion<DateTimeOffsetConverter>();
+        configurationBuilder.Properties<DateTimeOffset?>().HaveConversion<NullableDateTimeOffsetConverter>();
+    }
 }
