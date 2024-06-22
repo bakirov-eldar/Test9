@@ -41,7 +41,11 @@
                 <tr>
                     <th scope="row">@t.Id</th>
                     <td>@Html.DisplayFor(e => t.Type)</td>
-                    @if (t.FromUserId.HasValue && t.FromUserId != Model.User.Id)
+                    @if (t.WalletServiceClientAccountId.HasValue)
+                    {
+                        <td>@t.WalletServiceClientAccount.WalletServiceProvider.Name Лицевой счёт - @t.WalletServiceClientAccount.AccountNumber</td>
+                    }
+                    else if (t.FromUserId.HasValue && t.FromUserId != Model.User.Id)
                     {
                         <td>@t.FromUser.WalletNumber</td>
                     }

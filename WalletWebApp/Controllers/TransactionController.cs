@@ -119,7 +119,7 @@ public class TransactionController : Controller
         DateTimeOffset? committedDateBefore)
     {
         var user = await _userManager.GetUserAsync(User);
-        IQueryable<Transaction> query = _walletContext.Transactions.Include(e => e.FromUser).Include(e => e.ToUser)
+        IQueryable<Transaction> query = _walletContext.Transactions.Include(e => e.WalletServiceClientAccount).ThenInclude(e => e.WalletServiceProvider).Include(e => e.FromUser).Include(e => e.ToUser)
             .Where(e => e.FromUserId == user.Id || e.ToUserId == user.Id);
         if (committedDateBefore.HasValue)
         {
