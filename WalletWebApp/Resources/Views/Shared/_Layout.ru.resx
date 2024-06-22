@@ -135,4 +135,7 @@
   <data name="TopUpWallet" xml:space="preserve">
     <value>Пополнить счёт</value>
   </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Перевести</value>
+  </data>
 </root>

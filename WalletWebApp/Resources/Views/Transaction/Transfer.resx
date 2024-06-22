@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InsufficientFunds" xml:space="preserve">
-    <value>Недостаточно средств на вашем счёте</value>
+  <data name="Button" xml:space="preserve">
+    <value>Перевести</value>
   </data>
-  <data name="MatchIds" xml:space="preserve">
-    <value>Вы не можете перевести самому себе!</value>
-  </data>
-  <data name="UnknownWallet" xml:space="preserve">
-    <value>Данный номер кошелька не найден</value>
+  <data name="Title" xml:space="preserve">
+    <value>Перевести на другой кошелек</value>
   </data>
 </root>

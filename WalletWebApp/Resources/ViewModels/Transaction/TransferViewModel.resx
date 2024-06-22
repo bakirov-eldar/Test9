@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InsufficientFunds" xml:space="preserve">
-    <value>Недостаточно средств на вашем счёте</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Сумма</value>
   </data>
-  <data name="MatchIds" xml:space="preserve">
-    <value>Вы не можете перевести самому себе!</value>
+  <data name="AmountRange" xml:space="preserve">
+    <value>Минимальная сумма может быть {0} до {1}! </value>
   </data>
-  <data name="UnknownWallet" xml:space="preserve">
-    <value>Данный номер кошелька не найден</value>
+  <data name="AmountRequired" xml:space="preserve">
+    <value>Введите сумму!</value>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>Номер кошелька</value>
+  </data>
+  <data name="WalletRequired" xml:space="preserve">
+    <value>Введите номер кошелька!</value>
   </data>
 </root>
