@@ -117,28 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SignIn" xml:space="preserve">
-    <value>Войти</value>
+  <data name="CommittedDateAfter" xml:space="preserve">
+    <value>Дата после</value>
   </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>Выйти</value>
-  </data>
-  <data name="SignUp" xml:space="preserve">
-    <value>Зарегистрироваться</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Личный кабинет</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Главная</value>
-  </data>
-  <data name="Journal" xml:space="preserve">
-    <value>Журнал транзакций</value>
-  </data>
-  <data name="TopUpWallet" xml:space="preserve">
-    <value>Пополнить счёт</value>
-  </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>Перевести</value>
+  <data name="CommittedDateBefore" xml:space="preserve">
+    <value>Дата до</value>
   </data>
 </root>

@@ -1,0 +1,82 @@
+﻿@model WalletWebApp.ViewModels.Transaction.JournalViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@functions {
+    string GetMaxDate() => DateTimeOffset.UtcNow.ToString("yyyy-MM-dd");
+}
+
+<form class="row justify-content-start" asp-action="journal" method="get">
+    <div class="col-auto d-flex flex-column">
+        @Html.DisplayNameFor(e => e.CommittedDateAfter)
+        <input class="form-control" asp-for="@Model.CommittedDateAfter" type="date" max="@GetMaxDate()" />
+    </div>
+    <div class="col-auto d-flex flex-column">
+        @Html.DisplayNameFor(e => e.CommittedDateBefore)
+        <input class="form-control" asp-for="@Model.CommittedDateBefore" type="date" max="@GetMaxDate()" />
+    </div>
+    <div class="col-auto d-flex flex-column justify-content-end">
+        <button type="submit" class="btn btn-outline-primary">@Localizer["Filter"]</button>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">@Localizer["Type"]</th>
+            <th scope="col">@Localizer["CounterAgent"]</th>
+            <th scope="col">@Localizer["Amount"]</th>
+            <th scope="col">@Localizer["DateTime"]</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if(Model.Transactions.Count > 0)
+        {
+            @foreach (var t in Model.Transactions)
+            {
+                <tr>
+                    <th scope="row">@t.Id</th>
+                    <td>@Html.DisplayFor(e => t.Type)</td>
+                    @if (t.FromUserId.HasValue && t.FromUserId != Model.User.Id)
+                    {
+                        <td>@t.FromUser.WalletNumber</td>
+                    }
+                    else
+                    {
+                        @if (t.ToUserId.HasValue && t.ToUserId != Model.User.Id)
+                        {
+                            <td>@t.FromUser.WalletNumber</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                    }
+
+                    <td>
+                        @if (t.Type != TransactionType.Replenishment)
+                        {
+                            <span class="text-danger">- @t.Amount</span>
+                        }
+                        else
+                        {
+                            <span class="text-success">+@t.Amount</span>
+                        }
+                    </td>
+                    <td>@t.CommitedAt.ToString("dd.MM.yyyy hh:mm")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                @Localizer["NotFound"]
+            </tr>
+        }
+
+    </tbody>
+</table>

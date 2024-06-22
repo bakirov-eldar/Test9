@@ -22,7 +22,7 @@ public class TransactionController : Controller
     [HttpGet]
     public async Task<IActionResult> TopUpWallet()
     {
-        if(User?.Identity?.IsAuthenticated == true)
+        if (User?.Identity?.IsAuthenticated == true)
         {
             var user = await _userManager.GetUserAsync(User);
             return View(new TopUpViewModel()
@@ -35,17 +35,17 @@ public class TransactionController : Controller
     [HttpPost]
     public async Task<IActionResult> TopUpWallet(TopUpViewModel model)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(e => e.WalletNumber == model.WalletNumber);
-            if(user is not null)
+            if (user is not null)
             {
                 user.Balance += model.Amount;
                 var transaction = new Transaction()
                 {
                     Amount = model.Amount,
                     ToUserId = user.Id,
-                    Type = TransactionType.Payment
+                    Type = TransactionType.Replenishment
                 };
                 _walletContext.Transactions.Add(transaction);
                 await _userManager.UpdateAsync(user);
@@ -110,5 +110,34 @@ public class TransactionController : Controller
             }
         }
         return View();
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Journal(DateTimeOffset? committedDateAfter,
+        DateTimeOffset? committedDateBefore)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        IQueryable<Transaction> query = _walletContext.Transactions.Include(e => e.FromUser).Include(e => e.ToUser)
+            .Where(e => e.FromUserId == user.Id || e.ToUserId == user.Id);
+        if (committedDateBefore.HasValue)
+        {
+            query = query.Where(p => p.CommitedAt <= committedDateBefore.Value);
+        }
+        if (committedDateAfter.HasValue)
+        {
+            query = query.Where(p => p.CommitedAt >= committedDateAfter.Value);
+        }
+        var result = await query
+            .Where(e => e.Type != TransactionType.Other)
+            .OrderByDescending(e => e.CommitedAt)
+            .ToListAsync();
+        return View(new JournalViewModel()
+        {
+            Transactions = result,
+            CommittedDateAfter = committedDateAfter,
+            CommittedDateBefore = committedDateBefore,
+            User = user,
+        });
     }
 }
