@@ -1,0 +1,32 @@
+﻿@model WalletWebApp.ViewModels.Transaction.TopUpViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = @Localizer["Title"];
+    Layout = "_Layout";
+}
+
+<h2 class="text-center">@Localizer["Title"]</h2>
+<div class="container-sm d-flex justify-content-center">
+    <div class="col-lg-5 p-5 d-flex justify-content-center">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <form method="post" asp-controller="Transaction" asp-action="TopUpWallet">
+            <div class="mb-3">
+                <label asp-for="WalletNumber" class="form-label"></label>
+                <input asp-for="WalletNumber" type="text" class="form-control">
+                <span asp-validation-for="WalletNumber"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Amount" class="form-label"></label>
+                <input asp-for="Amount" type="number" min="0" max="10000000" step="0.01" class="form-control">
+                <span asp-validation-for="Amount"></span>
+            </div>
+            <div class="form-row">
+                <input class="w-100 btn btn-primary" type="submit" value="@Localizer["Button"]" />
+            </div>
+        </form>
+    </div>
+</div>
