@@ -8,4 +8,5 @@ public class Transaction
     public int? ToUserId { get; set; }
     public User? ToUser { get; set; }
     public decimal Amount { get; set; }
+    public TransactionType Type { get; set; }
 }
