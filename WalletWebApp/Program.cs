@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using WalletWebApp;
 using WalletWebApp.Models;
+using WalletWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization();
+
+builder.Services.AddTransient<WalletNumberGenerator>();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<WalletContext>(options => options.UseNpgsql(connection))
