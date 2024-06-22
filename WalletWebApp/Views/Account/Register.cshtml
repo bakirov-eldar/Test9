@@ -9,28 +9,38 @@
 
 <h2 class="text-center">@Localizer["Title"]</h2>
 <div class="container-sm d-flex justify-content-center">
-    <div class="col-lg-5 bordered-form p-5 d-flex justify-content-center">
+    <div class="col-lg-5 p-5 d-flex justify-content-center">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         <form method="post" asp-controller="Account" asp-action="Register">
             <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-row">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" />
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <div class="input-group">
+                    <i class="input-group-text bi bi-envelope-at"></i>
+                    <input asp-for="Email" type="text" class="form-control">
+                </div>
                 <span asp-validation-for="Email"></span>
             </div>
-            <div class="form-row">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <div class="pass-group input-group">
+                    <input asp-for="Password" type="password" class="form-control">
+                    <button type="button" class="btn btn-outline-primary">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
+                </div>
                 <span asp-validation-for="Password"></span>
             </div>
-            <div class="form-row">
-                <label asp-for="RepeatPassword"></label>
-                <input asp-for="RepeatPassword" />
+            <div class="mb-3">
+                <label asp-for="RepeatPassword" class="form-label"></label>
+                <div class="pass-group input-group">
+                    <input asp-for="RepeatPassword" type="password" class="form-control">
+                </div>
                 <span asp-validation-for="RepeatPassword"></span>
             </div>
             <div class="form-row">
-                <input type="submit" value="@Localizer["SignUp"]" />
+                <input class="w-100 btn btn-primary" type="submit" value="@Localizer["SignUp"]" />
             </div>
         </form>
     </div>
@@ -38,5 +48,6 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ShowHidePasswordScriptPartial");
     }
 }
