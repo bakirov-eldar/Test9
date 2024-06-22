@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System.Reflection;
 using WalletWebApp.Models;
 using WalletWebApp.ViewModels.Transaction;
 
@@ -56,7 +57,7 @@ public class TransactionController : Controller
                 ModelState.AddModelError("WalletNumber", _localizer["UnknownWallet"]);
             }
         }
-        return View();
+        return View(model);
     }
 
     [HttpGet]
@@ -109,7 +110,7 @@ public class TransactionController : Controller
                 ModelState.AddModelError("WalletNumber", _localizer["UnknownWallet"]);
             }
         }
-        return View();
+        return View(model);
     }
 
     [HttpGet]
@@ -139,5 +140,61 @@ public class TransactionController : Controller
             CommittedDateBefore = committedDateBefore,
             User = user,
         });
+    }
+
+    [HttpGet]
+    [Authorize]
+    public IActionResult Payment()
+    {
+        ViewBag.Providers = _walletContext.WalletServiceProvider.Include(e => e.User).ToList();
+        return View();
+
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Payment(PaymentViewModel model)
+    {
+        if(ModelState.IsValid)
+        {
+            var provider = _walletContext.WalletServiceProvider.Include(e => e.User).FirstOrDefault(e => e.User.WalletNumber == model.WalletServiceWalletNumber);
+            if(provider is not null) 
+            {
+                var account = _walletContext.WalletServiceClientAccounts.FirstOrDefault(e => e.WalletServiceProviderId == provider.Id && e.AccountNumber == model.AccountNumber);
+                if(account is not null)
+                {
+                    var sender = await _userManager.GetUserAsync(User);
+                    var newBalance = sender.Balance - model.Amount;
+                    if(newBalance >= 0)
+                    {
+                        sender.Balance = newBalance;
+                        var receiver = provider.User;
+                        receiver.Balance += model.Amount;
+                        var transaction = new Transaction()
+                        {
+                            Amount = model.Amount,
+                            FromUserId = sender.Id,
+                            ToUserId = receiver.Id,
+                            WalletServiceClientAccountId = account.Id,
+                            Type = TransactionType.Payment
+                        };
+                        _walletContext.Transactions.Add(transaction);
+                        await _userManager.UpdateAsync(sender);
+                        await _userManager.UpdateAsync(receiver);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Amount", _localizer["InsufficientFunds"]);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("AccountNumber", _localizer["UnknownAccount"]);
+                }
+            }
+        }
+        ViewBag.Providers = await _walletContext.WalletServiceProvider.Include(e => e.User).ToListAsync();
+        return View(model);
     }
 }

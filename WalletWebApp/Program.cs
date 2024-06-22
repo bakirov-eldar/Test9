@@ -31,7 +31,7 @@ builder.Services.AddDbContext<WalletContext>(options => options.UseNpgsql(connec
     .AddEntityFrameworkStores<WalletContext>();
 
 var app = builder.Build();
-
+await WalletServiceDataSeeder.SeedData(app.Services);
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

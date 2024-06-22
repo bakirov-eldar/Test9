@@ -9,6 +9,8 @@ namespace WalletWebApp.Models;
 public class WalletContext : IdentityDbContext<User, IdentityRole<int>, int>
 {
     public DbSet<Transaction> Transactions { get; set; } = null!;
+    public DbSet<WalletServiceProvider> WalletServiceProvider { get; set; }
+    public DbSet<WalletServiceClientAccount> WalletServiceClientAccounts { get; set; }
     public WalletContext(DbContextOptions<WalletContext> options) : base(options)
     {
         

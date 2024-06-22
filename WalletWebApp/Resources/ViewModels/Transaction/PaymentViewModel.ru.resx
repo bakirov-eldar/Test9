@@ -117,31 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SignIn" xml:space="preserve">
-    <value>Войти</value>
+  <data name="Account" xml:space="preserve">
+    <value>Номер лицевого счёта</value>
   </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>Выйти</value>
+  <data name="AccountRequired" xml:space="preserve">
+    <value>Введите номер лицевого счёта!</value>
   </data>
-  <data name="SignUp" xml:space="preserve">
-    <value>Зарегистрироваться</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Сумма</value>
   </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Личный кабинет</value>
+  <data name="AmountRange" xml:space="preserve">
+    <value>Минимальная сумма может быть {0} до {1}! </value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Главная</value>
+  <data name="AmountRequired" xml:space="preserve">
+    <value>Введите сумму!</value>
   </data>
-  <data name="Journal" xml:space="preserve">
-    <value>Журнал транзакций</value>
+  <data name="WalletServiceWalletNumber" xml:space="preserve">
+    <value>Поставщик услуги</value>
   </data>
-  <data name="Payment" xml:space="preserve">
-    <value>Оплата</value>
-  </data>
-  <data name="TopUpWallet" xml:space="preserve">
-    <value>Пополнить счёт</value>
-  </data>
-  <data name="Transfer" xml:space="preserve">
-    <value>Перевести</value>
+  <data name="WalletServiceWalletNumberRequired" xml:space="preserve">
+    <value>Выберите поставщика услуг!</value>
   </data>
 </root>

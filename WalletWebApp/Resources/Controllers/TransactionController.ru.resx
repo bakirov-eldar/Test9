@@ -123,6 +123,9 @@
   <data name="MatchIds" xml:space="preserve">
     <value>Вы не можете перевести самому себе!</value>
   </data>
+  <data name="UnknownAccount" xml:space="preserve">
+    <value>Данный номер лицевого счёта не найден!</value>
+  </data>
   <data name="UnknownWallet" xml:space="preserve">
     <value>Данный номер кошелька не найден</value>
   </data>

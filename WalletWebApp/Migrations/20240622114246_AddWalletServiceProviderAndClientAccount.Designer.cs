@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WalletWebApp.Models;
@@ -11,9 +12,11 @@ using WalletWebApp.Models;
 namespace WalletWebApp.Migrations
 {
     [DbContext(typeof(WalletContext))]
-    partial class WalletContextModelSnapshot : ModelSnapshot
+    [Migration("20240622114246_AddWalletServiceProviderAndClientAccount")]
+    partial class AddWalletServiceProviderAndClientAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,7 +288,7 @@ namespace WalletWebApp.Migrations
 
                     b.HasIndex("WalletServiceProviderId");
 
-                    b.ToTable("WalletServiceClientAccounts");
+                    b.ToTable("WalletServiceClientAccount");
                 });
 
             modelBuilder.Entity("WalletWebApp.Models.WalletServiceProvider", b =>
@@ -377,7 +380,7 @@ namespace WalletWebApp.Migrations
             modelBuilder.Entity("WalletWebApp.Models.WalletServiceClientAccount", b =>
                 {
                     b.HasOne("WalletWebApp.Models.WalletServiceProvider", "WalletServiceProvider")
-                        .WithMany("ClientAccounts")
+                        .WithMany()
                         .HasForeignKey("WalletServiceProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -394,11 +397,6 @@ namespace WalletWebApp.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WalletWebApp.Models.WalletServiceProvider", b =>
-                {
-                    b.Navigation("ClientAccounts");
                 });
 #pragma warning restore 612, 618
         }

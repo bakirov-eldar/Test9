@@ -1,0 +1,37 @@
+﻿@model WalletWebApp.ViewModels.Transaction.PaymentViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<h2 class="text-center">@Localizer["Title"]</h2>
+<div class="container-sm d-flex justify-content-center">
+    <div class="col-lg-5 p-5 d-flex justify-content-center">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <form method="post" asp-controller="Transaction" asp-action="Payment">
+            <div class="mb-3">
+                <label asp-for="WalletServiceWalletNumber" class="form-label"></label>
+                <select asp-for="WalletServiceWalletNumber" type="text" class="form-select">
+                    @foreach (var provider in ViewBag.Providers)
+                    {
+                        <option value="@provider.User.WalletNumber">@provider.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="WalletServiceWalletNumber"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="AccountNumber" class="form-label"></label>
+                <input asp-for="AccountNumber" type="text" class="form-control">
+                <span asp-validation-for="AccountNumber"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Amount" class="form-label"></label>
+                <input asp-for="Amount" type="number" min="0" max="10000000" step="0.01" class="form-control">
+                <span asp-validation-for="Amount"></span>
+            </div>
+            <div class="form-row">
+                <input class="w-100 btn btn-primary" type="submit" value="@Localizer["Button"]" />
+            </div>
+        </form>
+    </div>
+</div>
