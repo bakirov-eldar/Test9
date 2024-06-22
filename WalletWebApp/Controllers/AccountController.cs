@@ -55,7 +55,7 @@ public class AccountController : Controller
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    return RedirectToAction("Index", "ToDoList");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError("", _localizer["InvalidLogin"]);
@@ -92,7 +92,7 @@ public class AccountController : Controller
                 user.Balance = 100000;
                 await _userManager.UpdateAsync(user);
                 await _signInManager.SignInAsync(user, false);
-                return RedirectToAction("Index", "ToDoList");
+                return RedirectToAction("Index", "Home");
             }
             foreach (var error in result.Errors)
             {
